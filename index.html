@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUMINISCAN</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/botonchat.css">
+    <link rel="stylesheet" href="./css/proveedor.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .dropdown-menu .submenu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-top: -1px;
+            background-color: #2D95A3;
+        }
+    
+        .dropdown-menu > li:hover .submenu {
+            display: block;
+            
+        }
+
+    </style>
+       <style>
+       .tarjetaSesion-posicion { 
+        position: fixed;
+         bottom: 10px; 
+         right: 20px;
+          z-index: 1000;
+       }
+      </style>
+</head>
+<body>
+    
+   <!-- <header class="d-flex justify-content-between align-items-center px-3 py-2">
+        <img src="./imgs/suminiscan.jpg" alt="Logo" class="logo">
+        <div class="d-flex gap-2">
+          <a href="login.html" class="btn btn-primary">Iniciar sesión</a>
+          <a href="registro_proveedor.html" class="btn btn-success">Soy proveedor</a>
+        </div>
+      </header>-->
+                <!--CREACION DEL LA TARJETA DE SESION ACTIVA-->
+                <script>
+                    function getCookie(name) {
+                        var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)" ));
+                        return matches ? decodeURIComponent(matches[1]) : undefined;
+                    }
+                
+                    function deleteCookie(name) {
+                        document.cookie = name + '=; Max-Age=-99999999; path=/;';
+                        console.log('Cookie ' + name + ' deleted'); // Línea para depuración
+                    }
+                
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var sessionCookie = getCookie('session');
+                        var rolCookie = getCookie('rol');
+                        var nombreCookie = getCookie('nombre');
+                        var correoCookie = getCookie('correoc');
+                        console.log('Cookie session al cargar:', sessionCookie); // Línea para depuración
+                
+                        if (sessionCookie === 'active') {
+                            alert("Sesión iniciada, Gracias " + rolCookie);
+                
+                            var tarjetaSesion = document.getElementById('tarjetaSesion');
+                            tarjetaSesion.style.display = 'block';
+                
+                            var cardText = document.getElementById('card-text');
+                            cardText.textContent = "Tu sesión está activa " + rolCookie + ": " + nombreCookie;
+                        }else{
+                            deleteCookie('session');
+                                deleteCookie('rol');
+                                deleteCookie('nombre');
+                                deleteCookie('correoc');  
+                        }
+                
+                        var logoutBtn = document.getElementById('logoutBtn');
+                        if (logoutBtn) {
+                            logoutBtn.addEventListener('click', function() {
+                                deleteCookie('session');
+                                deleteCookie('rol');
+                                deleteCookie('nombre');
+                                deleteCookie('correoc');
+                                console.log('Cookie después de eliminar:', getCookie('session')); // Verificar eliminación
+                                var tarjetaSesion = document.getElementById('tarjetaSesion');
+                                tarjetaSesion.style.display = 'none'; // Ocultar la tarjeta
+                                alert('Sesión cerrada');
+                                // Asegurar que no se restablezca la cookie de sesión al recargar
+                                window.location.href = 'index.html'; // Redirigir a otra página
+                            });
+                        }
+                        var prov = document.getElementById('proveedor');
+                        var compras = document.getElementById('compras');
+                        var ventas = document.getElementById('ventas');
+            
+                if (rolCookie === 'PROVEEDOR') {
+                     prov.style.display = 'block';
+                 // Mostrar el botón 
+                 if (prov) {
+                     prov.addEventListener('click', function() { 
+                        // Asegurar que no se restablezca la cookie de sesión al recargar 
+                        window.location.href = 'proveedores.html'; // Redirigir a otra página 
+                        }); 
+                    }
+                    if (compras) {
+                     compras.addEventListener('click', function() { 
+                        // Asegurar que no se restablezca la cookie de sesión al recargar 
+                        window.location.href = `./php/compras.php?correoc=${correoCookie}`; // Redirigir a otra página 
+                        }); 
+                    }
+                    if (ventas) {
+                     ventas.addEventListener('click', function() { 
+                        // Asegurar que no se restablezca la cookie de sesión al recargar 
+                        window.location.href =`./php/ventas.php?correoc=${correoCookie}`; // Redirigir a otra página 
+                        }); 
+                    }
+                 } 
+                 else { 
+                    prov.style.display = 'none'; // Ocultar el botón
+                    ventas.style.display='none';
+                    if (compras) {
+                     compras.addEventListener('click', function() { 
+                        // Asegurar que no se restablezca la cookie de sesión al recargar 
+                        window.location.href = `./php/compras.php?correoc=${correoCookie}`; // Redirigir a otra página 
+                        }); 
+                    }
+                     }
+                    });
+                </script>
+                   <div id="tarjetaSesion" class="card tarjetaSesion-posicion" style="display: none;">
+                    <div class="card-body">
+                        <h5 class="card-title">Sesión Activa</h5>
+                        <p id="card-text" class="card-text">Tu sesión está activa.</p>
+                        <!-- Botón para cerrar sesión -->
+                        <button id="logoutBtn" class="btn btn-danger">Cerrar Sesión</button>
+                        <button id="proveedor" class="btn btn-success">Proveedor</button>
+                        <button id="compras" class="btn btn-info">Compras</button>
+                        <button id="ventas" class="btn btn-warning">Ventas</button>
+                    </div>
+                </div>
+                
+            <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #2D95A3;">
+            <div class="container navegacion" style="background-color: #2D95A3;">
+            <a class="navbar-brand" href="index.html">
+                <img src="imgs/suminiscan.jpg" alt="Bootstrap" width="30" height="24">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ofertas.html">OFERTAS</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="productos.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            PRODUCTOS
+                        </a>
+                        <ul class="dropdown-menu" style="    background-color: #2D95A3;"">
+                            <li><a class="dropdown-item" href="madera.html">MADERA</a>
+                                <ul class="submenu dropdown-menu">
+                                    <li><a class="dropdown-item" href="pino.html">PINO</a></li>
+                                    <li><a class="dropdown-item" href="picea.html">PICEA</a></li>
+                                    <li><a class="dropdown-item" href="larice.html">LÁRICE</a></li>
+                                    <li><a class="dropdown-item" href="enebro.html">ENEBRO</a></li>
+                                    <li><a class="dropdown-item" href="alamo.html">ÁLAMO</a></li>
+                                    <li><a class="dropdown-item" href="carpe.html">CARPE</a></li>
+                                    <li><a class="dropdown-item" href="abedul.html">ABEDUL</a></li>
+                                    <li><a class="dropdown-item" href="aliso.html">ALISO</a></li>
+                                    <li><a class="dropdown-item" href="haya.html">HAYA</a></li>
+                                    <li><a class="dropdown-item" href="maderaroble.html">ROBLE</a></li>
+                                    <li><a class="dropdown-item" href="olmo.html">OLMO</a></li>
+                                    <li><a class="dropdown-item" href="cerezo.html">CEREZO</a></li>
+                                    <li><a class="dropdown-item" href="peral.html">PERAL</a></li>
+                                    <li><a class="dropdown-item" href="arce.html">ARCE</a></li>
+                                    <li><a class="dropdown-item" href="tilo.html">TILO</a></li>
+                                    <li><a class="dropdown-item" href="fresno.html">FRESNO</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item" href="hierro.html">HIERRO</a>
+                                <ul class="submenu dropdown-menu">
+                                    <li><a class="dropdown-item" href="bajo.html">BAJO EN CARBONO</a></li>
+                                    <li><a class="dropdown-item" href="medio.html">MEDIO CARBONO</a></li>
+                                    <li><a class="dropdown-item" href="alto.html">ALTO EN CARBONO</a></li>
+                                    <li><a class="dropdown-item" href="aleados.html">ALEADOS</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item" href="verduras.html">VERDURAS</a>
+                                <ul class="submenu dropdown-menu">
+                                    <li><a class="dropdown-item" href="hoja.html">HOJA</a></li>
+                                    <li><a class="dropdown-item" href="tallo.html">TALLO</a></li>
+                                    <li><a class="dropdown-item" href="influrescencia.html">INFLURESCENCIA</a></li>
+                                    <li><a class="dropdown-item" href="fruto.html">FRUTO</a></li>
+                                    <li><a class="dropdown-item" href="bulbo.html">BULBO</a></li>
+                                    <li><a class="dropdown-item" href="semilla.html">SEMILLA</a></li>
+                                    <li><a class="dropdown-item" href="raiz.html">RAIZ</a></li>
+                                    <li><a class="dropdown-item" href="tuberculos.html">TUBÉRCULO</a></li>
+                                    <li><a class="dropdown-item" href="cormo.html">CORMO</a></li>
+                                    <li><a class="dropdown-item" href="rizoma.html">RIZOMA</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item" href="frutas.html">FRUTAS</a>
+                                <ul class="submenu dropdown-menu">
+                                    <li><a class="dropdown-item" href="hueso.html">DE HUESO O CAROZO</a></li>
+                                    <li><a class="dropdown-item" href="pepita.html">DE PEPITA O POMÁCEAS</a></li>
+                                    <li><a class="dropdown-item" href="grano.html">GRANO</a></li>
+                                    <li><a class="dropdown-item" href="fresca.html">FRESCA</a></li>
+                                    <li><a class="dropdown-item" href="seca.html">SECA, DISECADA O PASA</a></li>
+                                    <li><a class="dropdown-item" href="climaterica.html">CLIMATÉRICA</a></li>
+                                    <li><a class="dropdown-item" href="noclimaterica.html">NO CLIMATÉRICA</a></li>
+                                    <li><a class="dropdown-item" href="citrica.html">CÍTRICA</a></li>
+                                    <li><a class="dropdown-item" href="tropical.html">TROPICAL</a></li>
+                                    <li><a class="dropdown-item" href="bosque.html">BOSQUE</a></li>
+                                    <li><a class="dropdown-item" href="secos.html">FRUTO SECO</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">INICIAR SESIÓN</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-danger" type="submit" id="search">Buscar</button>
+                </form>
+            </div>
+            </div>
+            </nav>
+            
+            <script src="./js/buscar.js"></script>
+            <button id="chat-button" class="fixed-button"><i class="fab fa-whatsapp"></i></button> 
+            <div id="chat-panel" class="chat-panel" style="display: none;"> 
+            <button id="close-chat-button" class="close-button">&times;</button>
+            <iframe src="http://localhost:3000" width="100%" height="500px" frameborder="0"></iframe> 
+            </div>
+            <script> 
+            document.getElementById('chat-button').addEventListener('click', function() { var chatPanel = document.getElementById('chat-panel'); chatPanel.style.display = 'block'; });
+            document.getElementById('close-chat-button').addEventListener('click', function() { 
+            var chatPanel = document.getElementById('chat-panel'); 
+            chatPanel.style.display = 'none'; 
+            });
+            </script>
+
+    <!--CARRUSEEEEEL-->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="imgs/logo.jpg" class="d-block w-100" alt="-..">
+          </div>
+          <div class="carousel-item">
+            <img src="imgs/img1.jpg" class="d-block w-100" alt="-..">
+          </div>
+          <div class="carousel-item">
+            <img src="imgs/img2.jpg" class="d-block w-100" alt="-..">
+          </div>
+        </div>
+      </div>
+      
+      <!--OBJETIVOGENERAL-->
+      <section id="text" class="py-4">
+        <div class="container-fluid">
+            <div class="row"> 
+                    <div class="col-lg-4 col-mb-4 col-12 my-4">
+                        <div class="about-img">
+                            <img src="imgs/img1.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-mb-4 col-12 col-lg-8 ps-lg-5 mt-md-5 mb-2">
+                        <div class="about-text">
+                            <h3>Objetivo general</h3>
+                            <p>Mostrar los precios de la materia prima dentro del mercado comercial mediante una página web para lograr una mejor relación calidad-precio y un mercado más competitivo. </p>
+                        </div>  
+        </div>
+    </section>
+    
+<!-- INFORMACION SOBRE SUMINISCAN -->
+<section id="tutorias" class="services section-padding">
+    <div class="container">
+            <div class="row">
+                <div class="col-mb-12 mb-2">
+                    <div class="section-header text-center pb-5">
+                        <div class="card-body">
+                            <h2>Acerca de Nosotros
+                            </h2>
+                            <p>Página web dedicada a brindar el precio de los productos del mercado. Esto resuelve la dificultad para personas emprendedoras, pequeños y medianas empresas para establecer un precio de su producto al desconocer los precios de la materia en el mercado. 
+                                A su vez ayudar a estas empresas e individuos a conseguir la materia prima deseada a un precio optimo de su producto, esto con el afín de lograr costos óptimos (baratos) de los productos al momento de “crearlos” y distribuirlos para una competitividad y precio más accesible a los usuarios/compradores.
+                                </p>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-12 col-mb-12 py-2 col-lg-4 py-2">
+                    <div class="card bg-primary tetx-black  text-center">
+                        <div class="card-body">
+                        <i class="bi bi-person-arms-up" style="font-size: 50px;"></i>
+                        <h3 class="card-title">PROVEEDOR / VENDEDOR:</h3>
+                        <p class="lead">Le damos un grande agradecimiento por usar la p&aacute;gina y poner a disposici&oacute;n sus productos en venta, donde esperamos su apoyo con productos de buena calidad para crecer juntos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-mb-12 col-lg-4 py-2">
+                    <div class="card bg-success tetx-black text-center">
+                        <div class="card-body">
+                            <i class="bi bi-people-fill" style="font-size: 50px;"></i>    
+                        <h3 class="card-title">USUARIO / COMPRADOR</h3>
+                        <p class="lead">De todo coraz&oacute;n esperamos encuentres la mejor opci&oacute;n y el mejor producto para que optimices tus productos y suba la calidad de tus bienes/servicios. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-mb-12 col-lg-4 py-2">
+                    <div class="card bg-secondary tetx-black text-center">
+                        <div class="card-body">
+                            <i class="bi bi-hand-thumbs-up-fill" style="font-size: 50px;"></i>  
+                        <h3 class="card-title">VISITANTE / EXPLORADOR</h3>
+                        <p class="lead">Esperamos puedas unirte pronto a este equipo como comprador o proveedor, gracias por visitarnos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+</section>
+
+
+
+      <!--PIE DE PAGINA-->
+      <footer class="text-center mt-5">
+        <img src="imgs/suminiscan.jpg" alt="Logo" class="rounded mx-auto d-block mb-3" width="200">
+        <p>&copy; 2024 SUMINISCAN. EQUIPO 3. Todos los derechos reservados.</p>
+      </footer>
+</body>
+</html>
