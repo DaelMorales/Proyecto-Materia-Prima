@@ -1,0 +1,24 @@
+# Proyecto SUMINISCAN (Sitio web para materia prima)
+El proyecto muestra los precios a nivel nacional de la materia prima en el mercado mexicano mediante un sitio web, para ofertar distintas ofertas de esta.
+Esta misma mostraría las distintas opciones de compra y las mejores opciones en cuanto a calidad-precio, para obtener una oferta que sea la mejor relación calidad-precio de la materia que se llegue a necesitar.
+
+## Actores principales
+Proveedores: Personas encargadas de la actualización de precios, productos, visualizaciones y la descripción de sus productos en venta
+
+USUARIOS (COMPRADORES): Personas que se dedicarán a la compra, contacto y opiniones sobre el producto en venta.
+
+ADMINISTRADORES DE LA PÁGINA: Personas encargadas sobre la actualización, mejoras, optimizaciones de la página web
+
+## Instalacion:
+Se debe descargar y ejecutar la base de datos que se encuentra en la carpeta michat (fepi(2)), junto a los archivos .json y la base de datos del chat (chat.db), posteriormente se puede manipular el proyecto medisnte el login que se encuentra en la carpeta html.
+
+## USO:
+Podrás iniciar sesión como 3 diferentes actores, proveedor, usuario(el que adquiere la materia prima) o como administrador. A continuación explico las funcionalidades de cada actor. Los proveedores son las personas encargadas de la actualización de precios, productos, visualizaciones y la descripción de sus productos en venta, los usuarios/compradores son personas que se dedicarán a la compra, contacto y opiniones sobre el producto en venta, el administrador de el sitio web son aquellos encargados sobre la actualizaión, mejoras, optimización del sitio web. 
+
+## Tecnologías 
+
+HTML, Javascript, sql, php, css.
+
+## Autor
+
+-[Dael Erandi Morales Cruz]
